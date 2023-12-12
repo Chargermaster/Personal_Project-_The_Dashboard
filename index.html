@@ -6,24 +6,26 @@
     <title>Document</title>
     <link rel="stylesheet" href="css/style.css" />
   </head>
-  <body>
+  <body id ="bodyBackground">
     <!-- Ser ut att vara en flex-box: column med 3 divar (top, mid, bot). Mitten har en grid, ett element längst upp och 4 divs -->
     <main class="mainContainer">
       <!-- Header? -->
       <div class="timeContainer">
         <p>Time here, other time here</p>
       </div>
-      <section>
-        <h1 class="h1">test</h1>
+      <section class="cardsContainer">
+        <input id="pageTitle" class = "pageTitle" type="text" placeholder="Click to change title"></input>
         <div class="gridContainer">
-          <div>Div1</div>
-          <div>div2</div>
+          <div>Snabblänkar</div>
+          <div>Dagens Väder</div>
           <div>div3</div>
-          <div>div4</div>
+          <div>Anteckingar
+            <textarea class="cardTextField" name="" id="cardTextArea" cols="30" rows="10"></textarea>
+          </div>
         </div>
       </section>
       <!-- Footer? -->
-      <div class="randomButtonContainer"><button>Randomize</button></div>
+      <div class="randomButtonContainer"><input id = "backgroundTextInput" type="text"><button id = "backgroundSubmitButton">Randomize</button></div>
     </main>
     <script src="js/main.js"></script>
   </body>
