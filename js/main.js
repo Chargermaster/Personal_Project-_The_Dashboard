@@ -11,6 +11,7 @@ const backgroundSubmitButton = document.getElementById(
 );
 backgroundSubmitButton.addEventListener("click", getBackground);
 //Finds quick link button
+const firstCard = document.getElementById("firstCard");
 const quickLinkDiv = document.getElementById("quickLinkDiv");
 const test = document.getElementById("test");
 test.addEventListener("click", testFunction);
@@ -29,6 +30,24 @@ function testFunction() {
 }
 
 function test2() {
+  const linkCardDiv = document.createElement("div");
+  linkCardDiv.id = "linkCardDiv";
+  firstCard.appendChild(linkCardDiv);
+  const linkCardButton = document.createElement("button");
+  linkCardButton.id = "linkCardButton";
+  linkCardButton.textContent = "X";
+  linkCardButton.addEventListener("click", function removeLinkCard() {
+    console.log(this.parentElement);
+    this.parentElement.remove();
+  });
+  const linkCardLink = document.createElement("a");
+  const linkCardNode = document.createTextNode(`Sample Link`);
+  linkCardLink.appendChild(linkCardNode);
+  linkCardLink.title = "Sample link?";
+  //KOLLA OM DE SKRIVER MED HTTPS:// ELLER INTE
+  linkCardLink.href = "https://google.se";
+  linkCardDiv.appendChild(linkCardLink);
+  linkCardDiv.appendChild(linkCardButton);
   quickLinkDiv.innerHTML = "";
   quickLinkDiv.appendChild(test);
 }
