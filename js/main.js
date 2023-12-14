@@ -10,6 +10,28 @@ const backgroundSubmitButton = document.getElementById(
   "backgroundSubmitButton"
 );
 backgroundSubmitButton.addEventListener("click", getBackground);
+//Finds quick link button
+const quickLinkDiv = document.getElementById("quickLinkDiv");
+const test = document.getElementById("test");
+test.addEventListener("click", testFunction);
+
+function testFunction() {
+  quickLinkDiv.firstChild.remove();
+  const descriptionInput = document.createElement("input");
+  //descriptionInput.id = "descriptionInput"
+  quickLinkDiv.appendChild(descriptionInput);
+  const linkInput = document.createElement("input");
+  //linkInput.id = "linkInput";
+  quickLinkDiv.appendChild(linkInput);
+  const addLinksButton = document.createElement("button");
+  quickLinkDiv.appendChild(addLinksButton);
+  addLinksButton.addEventListener("click", test2);
+}
+
+function test2() {
+  quickLinkDiv.innerHTML = "";
+  quickLinkDiv.appendChild(test);
+}
 
 //Functions for the text fields
 function inputPageTitle(inputText) {

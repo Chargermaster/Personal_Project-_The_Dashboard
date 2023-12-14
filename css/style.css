@@ -45,6 +45,11 @@ body {
   align-items: center;
 }
 
+#quickLinkDiv {
+  display: flex;
+  justify-content: flex-end;
+}
+
 .cardTextField {
   width: 100%;
   height: 100%;
