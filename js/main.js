@@ -16,6 +16,9 @@ const quickLinkDiv = document.getElementById("quickLinkDiv");
 const test = document.getElementById("test");
 test.addEventListener("click", testFunction);
 
+let quickLinkDescription = " ";
+let quickLinkURL = " ";
+
 function testFunction() {
   quickLinkDiv.firstChild.remove();
   const descriptionInput = document.createElement("input");
@@ -26,8 +29,14 @@ function testFunction() {
   quickLinkDiv.appendChild(linkInput);
   const addLinksButton = document.createElement("button");
   quickLinkDiv.appendChild(addLinksButton);
-  addLinksButton.addEventListener("click", test2);
+  addLinksButton.addEventListener("click", function test3() {
+    quickLinkDescription = descriptionInput.value;
+    quickLinkURL = linkInput.value;
+    test2();
+  });
 }
+
+let linkCards = [];
 
 function test2() {
   const linkCardDiv = document.createElement("div");
@@ -37,15 +46,48 @@ function test2() {
   linkCardButton.id = "linkCardButton";
   linkCardButton.textContent = "X";
   linkCardButton.addEventListener("click", function removeLinkCard() {
-    console.log(this.parentElement);
     this.parentElement.remove();
   });
   const linkCardLink = document.createElement("a");
-  const linkCardNode = document.createTextNode(`Sample Link`);
+  const linkCardNode = document.createTextNode(`${quickLinkDescription}`);
   linkCardLink.appendChild(linkCardNode);
-  linkCardLink.title = "Sample link?";
-  //KOLLA OM DE SKRIVER MED HTTPS:// ELLER INTE
-  linkCardLink.href = "https://google.se";
+  //linkCardLink.title = "Sample link?";
+  //KOLLA OM DE SKRIVER MED HTTPS:// ELLER INTE - KLARTquickLinkURL
+  quickLinkURL = quickLinkURL.toLowerCase();
+  quickLinkURL.includes("http://") || quickLinkURL.includes("https://")
+    ? quickLinkURL
+    : (quickLinkURL = "https://" + quickLinkURL + "/");
+  console.log(quickLinkURL);
+  linkCardLink.href = quickLinkURL;
+  linkCardDiv.appendChild(linkCardLink);
+  linkCardDiv.appendChild(linkCardButton);
+  linkCards.push({
+    linkCardDescription: quickLinkDescription,
+    linkCardURL: quickLinkURL,
+  });
+  localStorage.setItem(`linkCards`, JSON.stringify(linkCards));
+  console.log(JSON.parse(localStorage.getItem(`linkCards`), "[]"));
+  quickLinkDiv.innerHTML = "";
+  quickLinkDiv.appendChild(test);
+}
+
+function buildLinkStorage(linkCardDescription, linkCardURL) {
+  const linkCardDiv = document.createElement("div");
+  linkCardDiv.id = "linkCardDiv";
+  firstCard.appendChild(linkCardDiv);
+  const linkCardButton = document.createElement("button");
+  linkCardButton.id = "linkCardButton";
+  linkCardButton.textContent = "X";
+  linkCardButton.addEventListener("click", function removeLinkCard() {
+    this.parentElement.remove();
+    linkCards = linkCards.filter((url) => url.linkCardURL != linkCardURL);
+    localStorage.setItem("linkCards", JSON.stringify(linkCards));
+  });
+  const linkCardLink = document.createElement("a");
+  const linkCardNode = document.createTextNode(`${linkCardDescription}`);
+  linkCardLink.appendChild(linkCardNode);
+  //linkCardLink.title = "Sample link?";
+  linkCardLink.href = linkCardURL;
   linkCardDiv.appendChild(linkCardLink);
   linkCardDiv.appendChild(linkCardButton);
   quickLinkDiv.innerHTML = "";
@@ -97,3 +139,12 @@ localStorage.getItem("backgroundImage") != null
       "backgroundImage"
     )}')`)
   : console.log("LocalStorage backrgound img error");
+
+localStorage.getItem("linkCards") != null
+  ? [
+      JSON.parse(localStorage.getItem("linkCards")).forEach((element) => {
+        buildLinkStorage(element.linkCardDescription, element.linkCardURL);
+      }),
+      (linkCards = JSON.parse(localStorage.getItem("linkCards"))),
+    ]
+  : console.log("LocalStorage linkCards null");
