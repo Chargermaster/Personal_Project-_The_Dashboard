@@ -151,6 +151,48 @@ function getBackground() {
   }
 }
 
+async function getWeather(geoLocation) {
+  await Promise.all([
+    fetch(
+      `https://api.openweathermap.org/data/2.5/forecast?lat=${geoLocation.coords.latitude}&lon=${geoLocation.coords.longitude}&cnt=16&units=metric&lang=se&appid=b0cdf53bf9cb2cc5ea401ec088598def`
+    ),
+  ])
+    .then((results) => Promise.all(results.map((data) => data.json())))
+    .then((response) => {
+      console.log(response);
+      const intervals = [];
+      intervals.push(0, 7, 15);
+      for (i = 1; i <= 3; i++) {
+        const weatherCard = document.getElementById(`weatherCard${i}`);
+        const weatherImage = document.getElementById(`weatherImage${i}`);
+        let weatherImageElement = document.createElement("img");
+        weatherImageElement.src =
+          "https://openweathermap.org/img/wn/" +
+          response[0].list[intervals[i - 1]].weather[0].icon +
+          ".png";
+        weatherImage.appendChild(weatherImageElement);
+        const weatherTemperature = document.getElementById(
+          `weatherTemperature${i}`
+        );
+        let weatherTemperatureText = document.createElement("p");
+        weatherTemperatureText.textContent =
+          Math.round(response[0].list[intervals[i - 1]].main.temp) + "°C";
+        weatherTemperature.appendChild(weatherTemperatureText);
+        const weatherType = document.getElementById(`weatherType${i}`);
+        let weatherTypeText = document.createElement("p");
+        weatherTypeText.textContent =
+          response[0].list[intervals[i - 1]].weather[0].description;
+        weatherType.appendChild(weatherTypeText);
+      }
+    })
+
+    .catch((error) => {
+      console.error("Error: ", error);
+    });
+}
+
+navigator.geolocation.getCurrentPosition(getWeather);
+
 async function getBackgroundAPI(api_url) {
   const response = await fetch(api_url);
   if (response.ok) {
