@@ -16,6 +16,39 @@ const quickLinkDiv = document.getElementById("quickLinkDiv");
 const test = document.getElementById("test");
 test.addEventListener("click", testFunction);
 
+const timeContainer = document.getElementById("timeContainer");
+const currentTime = document.getElementById("currentTime");
+timeContainer.appendChild(currentTime);
+const currentDate = document.getElementById("currentDate");
+timeContainer.appendChild(currentDate);
+let localMinute,
+  localHour,
+  localDate,
+  intervalTimer = 60,
+  ranTimeOnce = false;
+
+function displayTime() {
+  let date = new Date();
+  localMinute = date.getMinutes();
+  localHour = date.getHours();
+  dateString = date.toDateString();
+  currentTime.textContent = localHour + ":" + localMinute;
+  dateString = dateString.split(" ");
+  currentDate.textContent =
+    dateString[2] + " " + dateString[1] + " " + dateString[3];
+  console.log(date.getSeconds());
+  if (ranTimeOnce === false) {
+    intervalTimer -= date.getSeconds();
+    setTimeout(displayTime, intervalTimer * 1000);
+    intervalTimer = 60;
+    ranTimeOnce = true;
+  } else {
+    setTimeout(displayTime, intervalTimer * 1000);
+  }
+}
+
+displayTime();
+
 let quickLinkDescription = " ";
 let quickLinkURL = " ";
 
