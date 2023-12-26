@@ -22,20 +22,23 @@
         />
         <div class="gridContainer">
           <div class="quickLinkContainer">
-            <div>Snabblänkar</div>
+            <h2>Snabblänkar</h2>
             <div id="firstCard"></div>
-            <div id="quickLinkDiv"><button id="test">Test</button></div>
+            <div id="quickLinkButton"><button id="test">Test</button></div>
           </div>
           <div class="weatherContainer">
-            Dagens Väder
+            <h2>Dagens Väder</h2>
             <div id="weatherCard1" class="weatherCards">
               <div id="weatherImage1">
                 <div class="weatherDay">
                   Idag
                   <div class="weatherInfo">
                     <div>
-                      <p id="weatherTemperature1"></p>
-                      <p id="weatherType1"></p>
+                      <p
+                        id="weatherTemperature1"
+                        class="weatherinfoDetails"
+                      ></p>
+                      <p id="weatherType1" class="weatherinfoDetails"></p>
                     </div>
                   </div>
                 </div>
@@ -44,11 +47,14 @@
             <div id="weatherCard2" class="weatherCards">
               <div id="weatherImage2">
                 <div class="weatherDay">
-                  Idag
+                  Imorgon
                   <div class="weatherInfo">
                     <div>
-                      <p id="weatherTemperature2"></p>
-                      <p id="weatherType2"></p>
+                      <p
+                        id="weatherTemperature2"
+                        class="weatherinfoDetails"
+                      ></p>
+                      <p id="weatherType2" class="weatherinfoDetails"></p>
                     </div>
                   </div>
                 </div>
@@ -56,21 +62,26 @@
             </div>
             <div id="weatherCard3" class="weatherCards">
               <div id="weatherImage3">
-                <div class="weatherDay">
-                  Idag
+                <div class="weatherDay" class="weatherinfoDetails">
+                  <!-- Imorgon Hämta veckodag -->
                   <div class="weatherInfo">
                     <div>
-                      <p id="weatherTemperature3"></p>
-                      <p id="weatherType3"></p>
+                      <p
+                        id="weatherTemperature3"
+                        class="weatherinfoDetails"
+                      ></p>
+                      <p id="weatherType3" class="weatherinfoDetails"></p>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div>div3</div>
-          <div>
-            Anteckingar
+          <div class="div3">
+            <h2>div3</h2>
+          </div>
+          <div class="textFieldDiv">
+            <h2>Anteckingar</h2>
             <textarea
               class="cardTextField"
               name=""

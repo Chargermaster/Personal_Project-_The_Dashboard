@@ -30,11 +30,13 @@ body {
   display: grid;
   grid-template-columns: 20vw 20vw 20vw 20vw;
   gap: 1rem;
+  text-align: center;
 }
 
 .gridContainer div {
   padding: 1rem;
-  background-color: #eee;
+
+  border-radius: 10px;
 }
 
 .cardsContainer {
@@ -43,24 +45,32 @@ body {
   align-items: center;
 }
 
+.quickLinkContainer {
+  background-color: #eee;
+}
+
 .quickLinkContainer div {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  padding: 0.2rem;
-  width: 100%;
-}
-
-#firstCard div {
-  display: flex;
   justify-content: flex-start;
 }
 
 #linkCardDiv {
   display: flex;
   flex-direction: row;
-  width: 80%;
   background-color: white;
+  margin-bottom: 0.8rem;
+}
+
+#firstCard {
+  padding: 0;
+}
+
+#quickLinkButton {
+  padding: 0;
+  width: 100%;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 #linkCardButton {
@@ -75,19 +85,27 @@ body {
   color: red;
 }
 
+.weatherContainer {
+  background-color: #eee;
+}
+
+.weatherContainer img {
+  max-width: 5rem;
+  min-height: 5rem;
+}
+
 .weatherContainer div {
   width: 100%;
   display: flex;
-  flex-direction: row;
   padding: 0;
-  margin-top: 1rem;
 }
 
 .weatherDay {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  border: 2px solid red;
+  align-items: flex-start;
+  margin-left: 1rem;
+  margin-top: 0.5rem;
 }
 .weatherCards > div {
   display: flex;
@@ -97,24 +115,39 @@ body {
   background-color: white;
 }
 
+.weatherCards {
+  margin-top: 1rem;
+}
+
 .weatherInfo div {
   display: flex;
   flex-direction: row;
   gap: 1rem;
+  margin: 0;
+  margin-right: 0.5rem;
 }
 
-.weatherInfo div {
-  display: flex;
-
-  background-color: lightgray;
+.weatherinfoDetails p {
+  background-color: #eee;
+  padding: 0.3rem 0.3rem;
   margin: 0;
+  border-radius: 5px;
+  font-size: 0.8rem;
 }
 
 .cardTextField {
   width: 100%;
-  height: 100%;
+  height: 80%;
   border: none;
   resize: none;
+}
+
+.div3 {
+  background-color: #eee;
+}
+
+.textFieldDiv {
+  background-color: #eee;
 }
 
 .pageTitle {

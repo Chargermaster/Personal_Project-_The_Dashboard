@@ -12,7 +12,7 @@ const backgroundSubmitButton = document.getElementById(
 backgroundSubmitButton.addEventListener("click", getBackground);
 //Finds quick link button
 const firstCard = document.getElementById("firstCard");
-const quickLinkDiv = document.getElementById("quickLinkDiv");
+const quickLinkButton = document.getElementById("quickLinkButton");
 const test = document.getElementById("test");
 test.addEventListener("click", testFunction);
 
@@ -53,15 +53,15 @@ let quickLinkDescription = " ";
 let quickLinkURL = " ";
 
 function testFunction() {
-  quickLinkDiv.firstChild.remove();
+  quickLinkButton.firstChild.remove();
   const descriptionInput = document.createElement("input");
   //descriptionInput.id = "descriptionInput"
-  quickLinkDiv.appendChild(descriptionInput);
+  quickLinkButton.appendChild(descriptionInput);
   const linkInput = document.createElement("input");
   //linkInput.id = "linkInput";
-  quickLinkDiv.appendChild(linkInput);
+  quickLinkButton.appendChild(linkInput);
   const addLinksButton = document.createElement("button");
-  quickLinkDiv.appendChild(addLinksButton);
+  quickLinkButton.appendChild(addLinksButton);
   addLinksButton.addEventListener("click", function test3() {
     quickLinkDescription = descriptionInput.value;
     quickLinkURL = linkInput.value;
@@ -100,8 +100,8 @@ function test2() {
   });
   localStorage.setItem(`linkCards`, JSON.stringify(linkCards));
   console.log(JSON.parse(localStorage.getItem(`linkCards`), "[]"));
-  quickLinkDiv.innerHTML = "";
-  quickLinkDiv.appendChild(test);
+  quickLinkButton.innerHTML = "";
+  quickLinkButton.appendChild(test);
 }
 
 function buildLinkStorage(linkCardDescription, linkCardURL) {
@@ -123,8 +123,8 @@ function buildLinkStorage(linkCardDescription, linkCardURL) {
   linkCardLink.href = linkCardURL;
   linkCardDiv.appendChild(linkCardLink);
   linkCardDiv.appendChild(linkCardButton);
-  quickLinkDiv.innerHTML = "";
-  quickLinkDiv.appendChild(test);
+  quickLinkButton.innerHTML = "";
+  quickLinkButton.appendChild(test);
 }
 
 //Functions for the text fields
