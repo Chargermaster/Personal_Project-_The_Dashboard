@@ -208,6 +208,45 @@ async function getBackgroundAPI(api_url) {
   }
 }
 
+const bbcNewsContainer = document.getElementById("bbcNewsContainer");
+async function getNewsArticles() {
+  const response = await fetch(
+    `https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=48d9d28488c942a59433583a879f675c`
+  );
+  if (response.ok) {
+    const newsArticles = await response.json();
+    for (i = 0; i < 3; i++) {
+      const articleContainer = document.createElement("div");
+      articleContainer.className = "articleContainer";
+      //Create image
+      const articleImage = document.createElement("img");
+      articleImage.className = "articleImage";
+      articleImage.src = newsArticles.articles[i].urlToImage;
+      articleContainer.appendChild(articleImage);
+      //Create link + title
+      const articleTitle = document.createElement("a");
+      articleTitle.className = "articleTitle";
+      const articleUrlTextNode = document.createTextNode(
+        newsArticles.articles[i].url
+      );
+      articleTitle.href = newsArticles.articles[i].url;
+      articleTitle.appendChild(articleUrlTextNode);
+      articleTitle.textContent = newsArticles.articles[i].title;
+      articleContainer.appendChild(articleTitle);
+      //create description
+      const articleDescription = document.createElement("p");
+      articleDescription.className = "articleDescription";
+      articleDescription.textContent = newsArticles.articles[i].description;
+      articleContainer.appendChild(articleDescription);
+
+      bbcNewsContainer.appendChild(articleContainer);
+      //urlToImage
+    }
+  }
+}
+
+getNewsArticles();
+
 //Upon loading the site it will check if a background has already been applied by the user via local storage
 localStorage.getItem("backgroundImage") != null
   ? (body.style.backgroundImage = `url('${localStorage.getItem(
