@@ -24,7 +24,9 @@
           <div class="quickLinkContainer">
             <h2>Snabblänkar</h2>
             <div id="firstCard"></div>
-            <div id="quickLinkButton"><button id="test">Test</button></div>
+            <div id="quickLinkButton">
+              <button id="addLinkButton">Lägg till sida</button>
+            </div>
           </div>
           <div class="weatherContainer">
             <h2>Dagens Väder</h2>
@@ -63,6 +65,7 @@
             <div id="weatherCard3" class="weatherCards">
               <div id="weatherImage3">
                 <div class="weatherDay" class="weatherinfoDetails">
+                  <p id="WeatherDayText"></p>
                   <!-- Imorgon Hämta veckodag -->
                   <div class="weatherInfo">
                     <div>
@@ -95,11 +98,11 @@
       </section>
       <!-- Footer? -->
       <div class="randomButtonContainer">
-        <input id="backgroundTextInput" type="text" /><button
-          id="backgroundSubmitButton"
-        >
-          Randomize
-        </button>
+        <input
+          id="backgroundTextInput"
+          type="text"
+          placeholder="Nyckelord"
+        /><button id="backgroundSubmitButton">Lägg till bakgrund</button>
       </div>
     </main>
     <script src="js/main.js"></script>

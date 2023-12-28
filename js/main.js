@@ -13,8 +13,8 @@ backgroundSubmitButton.addEventListener("click", getBackground);
 //Finds quick link button
 const firstCard = document.getElementById("firstCard");
 const quickLinkButton = document.getElementById("quickLinkButton");
-const test = document.getElementById("test");
-test.addEventListener("click", testFunction);
+const addLinkButton = document.getElementById("addLinkButton");
+addLinkButton.addEventListener("click", addLinkTransform);
 
 const timeContainer = document.getElementById("timeContainer");
 const currentTime = document.getElementById("currentTime");
@@ -52,26 +52,30 @@ displayTime();
 let quickLinkDescription = " ";
 let quickLinkURL = " ";
 
-function testFunction() {
-  quickLinkButton.firstChild.remove();
+function addLinkTransform() {
+  addLinkButton.remove();
   const descriptionInput = document.createElement("input");
+  descriptionInput.placeholder = "Länkens namn";
   //descriptionInput.id = "descriptionInput"
   quickLinkButton.appendChild(descriptionInput);
   const linkInput = document.createElement("input");
+  linkInput.placeholder = "Länkens URL";
   //linkInput.id = "linkInput";
   quickLinkButton.appendChild(linkInput);
   const addLinksButton = document.createElement("button");
+  addLinksButton.textContent = "Lägg till";
+  addLinksButton.id = "addLinkButton";
   quickLinkButton.appendChild(addLinksButton);
-  addLinksButton.addEventListener("click", function test3() {
+  addLinksButton.addEventListener("click", function moveLinkInformation() {
     quickLinkDescription = descriptionInput.value;
     quickLinkURL = linkInput.value;
-    test2();
+    createLinkCard();
   });
 }
 
 let linkCards = [];
-
-function test2() {
+let buttonTracekr = 0;
+function createLinkCard() {
   const linkCardDiv = document.createElement("div");
   linkCardDiv.id = "linkCardDiv";
   firstCard.appendChild(linkCardDiv);
@@ -80,9 +84,15 @@ function test2() {
   linkCardButton.textContent = "X";
   linkCardButton.addEventListener("click", function removeLinkCard() {
     this.parentElement.remove();
+    let linkCardsIndex = linkCards.findIndex(
+      (url) => url.linkCardURL === this.parentElement.childNodes[0].href
+    );
+    linkCards.splice(linkCardsIndex, 1);
+    localStorage.setItem("linkCards", JSON.stringify(linkCards));
   });
   const linkCardLink = document.createElement("a");
   const linkCardNode = document.createTextNode(`${quickLinkDescription}`);
+  linkCardLink.target = "_blank";
   linkCardLink.appendChild(linkCardNode);
   //linkCardLink.title = "Sample link?";
   //KOLLA OM DE SKRIVER MED HTTPS:// ELLER INTE - KLARTquickLinkURL
@@ -93,15 +103,17 @@ function test2() {
   console.log(quickLinkURL);
   linkCardLink.href = quickLinkURL;
   linkCardDiv.appendChild(linkCardLink);
-  linkCardDiv.appendChild(linkCardButton);
   linkCards.push({
     linkCardDescription: quickLinkDescription,
     linkCardURL: quickLinkURL,
   });
+
+  linkCardDiv.appendChild(linkCardButton);
   localStorage.setItem(`linkCards`, JSON.stringify(linkCards));
-  console.log(JSON.parse(localStorage.getItem(`linkCards`), "[]"));
+
   quickLinkButton.innerHTML = "";
-  quickLinkButton.appendChild(test);
+  quickLinkButton.appendChild(addLinkButton);
+  buttonTracekr++;
 }
 
 function buildLinkStorage(linkCardDescription, linkCardURL) {
@@ -118,13 +130,14 @@ function buildLinkStorage(linkCardDescription, linkCardURL) {
   });
   const linkCardLink = document.createElement("a");
   const linkCardNode = document.createTextNode(`${linkCardDescription}`);
+  linkCardLink.target = "_blank";
   linkCardLink.appendChild(linkCardNode);
   //linkCardLink.title = "Sample link?";
   linkCardLink.href = linkCardURL;
   linkCardDiv.appendChild(linkCardLink);
   linkCardDiv.appendChild(linkCardButton);
   quickLinkButton.innerHTML = "";
-  quickLinkButton.appendChild(test);
+  quickLinkButton.appendChild(addLinkButton);
 }
 
 //Functions for the text fields
@@ -151,7 +164,18 @@ function getBackground() {
   }
 }
 
+const daysOfTheWeek = [
+  "Måndag",
+  "Tisdag",
+  "Onsdag",
+  "Torsdag",
+  "Fredag",
+  "Lördag",
+  "Söndag",
+];
 async function getWeather(geoLocation) {
+  let date = new Date();
+  console.log();
   await Promise.all([
     fetch(
       `https://api.openweathermap.org/data/2.5/forecast?lat=${geoLocation.coords.latitude}&lon=${geoLocation.coords.longitude}&cnt=16&units=metric&lang=se&appid=b0cdf53bf9cb2cc5ea401ec088598def`
@@ -164,6 +188,11 @@ async function getWeather(geoLocation) {
       intervals.push(0, 7, 15);
       for (i = 1; i <= 3; i++) {
         const weatherCard = document.getElementById(`weatherCard${i}`);
+        if (weatherCard.id === "weatherCard3") {
+          const weatherDayDiv = document.getElementById("WeatherDayText");
+          weatherDayDiv.textContent =
+            daysOfTheWeek[date.getDay(date.setDate(date.getDate() + 2)) - 1];
+        }
         const weatherImage = document.getElementById(`weatherImage${i}`);
         let weatherImageElement = document.createElement("img");
         weatherImageElement.src =
@@ -230,6 +259,7 @@ async function getNewsArticles() {
         newsArticles.articles[i].url
       );
       articleTitle.href = newsArticles.articles[i].url;
+      articleTitle.target = "_blank";
       articleTitle.appendChild(articleUrlTextNode);
       articleTitle.textContent = newsArticles.articles[i].title;
       articleContainer.appendChild(articleTitle);
@@ -262,3 +292,11 @@ localStorage.getItem("linkCards") != null
       (linkCards = JSON.parse(localStorage.getItem("linkCards"))),
     ]
   : console.log("LocalStorage linkCards null");
+
+localStorage.getItem("inputField") != null
+  ? (pageTitel.value = localStorage.getItem("inputField"))
+  : console.log("LocalStorage title error");
+
+localStorage.getItem("textArea") != null
+  ? (cardTextArea.value = localStorage.getItem("textArea"))
+  : console.log("LocalStorage text area error");
