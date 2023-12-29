@@ -70,7 +70,7 @@ body {
   color: black;
 }
 
-#quickLinkButton {
+#quickLinkButtonContainer {
   margin-top: 1rem;
   padding: 0;
   width: 100%;
