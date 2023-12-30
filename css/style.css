@@ -1,9 +1,13 @@
+/* Outside of even the main container */
 body {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  background-size: cover;
+  background-position: center;
 }
 
+/* Has every single part of the website inside of it */
 .mainContainer {
   display: flex;
   flex-direction: column;
@@ -12,6 +16,7 @@ body {
   width: 100vw;
 }
 
+/*Style for the clock */
 .timeContainer {
   display: flex;
   min-width: 10rem;
@@ -28,6 +33,22 @@ body {
   margin: 0;
 }
 
+/* Styling for the title */
+.pageTitle {
+  border: none;
+  background: none;
+  margin-bottom: 3rem;
+  font-size: 5rem;
+  text-align: center;
+  text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white,
+    1px 1px 0 white;
+}
+
+.pageTitle:focus {
+  outline: none;
+}
+
+/* The grid for the four cards */
 .gridContainer {
   display: grid;
   grid-template-columns: 20vw 20vw 20vw 20vw;
@@ -35,16 +56,16 @@ body {
   text-align: center;
 }
 
+.gridContainer h1 {
+  background-color: #eee;
+}
+
 .gridContainer div {
   border-radius: 10px;
 }
 
-.cardsContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
+/* First card */
+/* The container for the quick links, I.E. all of the first card */
 .quickLinkContainer {
   background-color: #eee;
 }
@@ -55,6 +76,14 @@ body {
   justify-content: flex-start;
 }
 
+/* A bit confusingly named class for another container to hold the cards created inside of the quick link section */
+.cardsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* This holds all of the information for the link cards */
 #linkCardDiv {
   display: flex;
   flex-direction: row;
@@ -78,6 +107,7 @@ body {
   gap: 0.5rem;
 }
 
+/* Styling for the button at the very bottom of the first card where you're able to add quick links */
 #addLinkButton {
   border: none;
   background-color: white;
@@ -103,7 +133,8 @@ body {
 #linkCardButton:hover {
   color: red;
 }
-
+/* Second card */
+/* Styling for the cards that has to do with the weather */
 .weatherContainer {
   background-color: #eee;
   padding: 0 1rem;
@@ -159,37 +190,9 @@ body {
   margin: 0;
 }
 
-.cardTextField {
-  width: 100%;
-  height: 85%;
-  border: none;
-  resize: none;
-  padding: 0;
-}
-
+/* Third card */
+/* A freebie, in my case it's similar to the other ones where it has cards holding information, this time for news */
 .bbcNews {
-  background-color: #eee;
-}
-
-.textFieldDiv {
-  background-color: #eee;
-  padding: 0 1rem;
-}
-
-.pageTitle {
-  border: none;
-  background: none;
-  margin-bottom: 3rem;
-  font-size: 5rem;
-  text-align: center;
-  text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white,
-    1px 1px 0 white;
-}
-
-.pageTitle:focus {
-  outline: none;
-}
-.gridContainer h1 {
   background-color: #eee;
 }
 
@@ -221,6 +224,21 @@ body {
   padding: 1rem;
 }
 
+/* Fourth card */
+/* Styling for the custom text area */
+.textFieldDiv {
+  background-color: #eee;
+  padding: 0 1rem;
+}
+
+.cardTextField {
+  width: 100%;
+  height: 85%;
+  border: none;
+  resize: none;
+  padding: 0;
+}
+/* Styling for the bottom of the page where you can change the background */
 .randomButtonContainer {
   display: flex;
   align-items: center;
@@ -249,9 +267,4 @@ body {
 
 .randomButtonContainer button {
   cursor: pointer;
-}
-
-#bodyBackground {
-  background-size: cover;
-  background-position: center;
 }
